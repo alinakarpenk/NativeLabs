@@ -1,9 +1,9 @@
-import {FlatList, RefreshControl, View} from "react-native";
+import {FlatList, RefreshControl, TouchableOpacity, View} from "react-native";
 import React from "react";
 import data from "../data/news.json";
 import News from "../components/News";
 
-export default function NewsPage() {
+export default function NewsPage({ navigation }) {
 
     const [posts, setPosts] = React.useState(data);
     const [refreshing, setRefreshing] = React.useState(false);
@@ -20,8 +20,13 @@ export default function NewsPage() {
             <View>
                 <FlatList
                     data={posts}
-                    renderItem={({ item }) => <News title={item.title} text={item.text} imgURL={item.imgURL} date={item.date}/>}
+                    renderItem={({ item }) =>
+                        <TouchableOpacity onPress={() => navigation.navigate('FullNews', { id: item.id })}>
+                           <News title={item.title} text={item.text} imgURL={item.imgURL} date={item.date}/>
+                        </TouchableOpacity>
+                }
                     refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+
                 />
             </View>
     )
