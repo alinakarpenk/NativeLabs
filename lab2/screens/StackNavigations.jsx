@@ -7,11 +7,9 @@ const Stack = createNativeStackNavigator();
 
 export function StackNavigations() {
     return (
-        <NavigationContainer>
         <Stack.Navigator>
             <Stack.Screen name="Новини" component={NewsPage} />
             <Stack.Screen name="FullNews" component={FullNews}/>
         </Stack.Navigator>
-        </NavigationContainer>
     )
 }
