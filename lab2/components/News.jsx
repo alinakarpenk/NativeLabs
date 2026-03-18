@@ -4,9 +4,6 @@ import React from "react";
 const Post = styled.View`
     padding: 10px;
     flex-direction: row;
-    border-bottom-style: solid;
-    border-bottom-width: 1px;
-    border-bottom-color: #616161;
 `
 
 const PostImage = styled.Image`

@@ -1,7 +1,6 @@
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import NewsPage from "./NewsPage";
-import FullNews from "./FullNews";
-import {NavigationContainer} from "@react-navigation/native";
+import NewsPage from "../screens/NewsPage";
+import FullNews from "../screens/FullNews";
 
 const Stack = createNativeStackNavigator();
 

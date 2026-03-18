@@ -1,20 +1,19 @@
 import {createDrawerNavigator} from "@react-navigation/drawer";
-import {NavigationContainer} from "@react-navigation/native";
-import NewsPage from "./NewsPage";
-import ContactsScreen from "./ContactsScreen";
+import ContactsScreen from "../screens/ContactsScreen";
+import CustomDrawerMenu from "./CustomDrawerMenu"
 import {StackNavigations} from "./StackNavigations";
-
 const Drawer = createDrawerNavigator()
 
 export default function DrawerNavigator() {
     return (
-            <Drawer.Navigator screenOptions={{ headerShown: false }}>
+            <Drawer.Navigator screenOptions={{ headerShown: false }}
+                drawerContent={(props) => <CustomDrawerMenu {...props} />}>
                 <Drawer.Screen
-                   name="NewsStack"
+                   name="Новини"
                    component={StackNavigations}
                 />
                 <Drawer.Screen
-                    name="Contacts"
+                    name="Контакти"
                     component={ContactsScreen}
                 />
             </Drawer.Navigator>
