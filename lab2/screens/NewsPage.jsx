@@ -2,6 +2,7 @@ import {FlatList, RefreshControl, TouchableOpacity, View, Text} from "react-nati
 import React from "react";
 import data from "../data/news.json";
 import News from "../components/News";
+import Header from "../components/Header";
 
 export default function NewsPage({ navigation }) {
 
@@ -29,7 +30,7 @@ export default function NewsPage({ navigation }) {
                 <FlatList
                     data={posts}
                     keyExtractor={(item) => item.id.toString()}
-                    ListHeaderComponent={<Text>Сторінка новин</Text>}
+                    ListHeaderComponent={<Header title="Екран новин" show={false} showDrawer={true}/>}
                     ListFooterComponent={<Text>Футер новин</Text>}
                     ItemSeparatorComponent={<View style={{padding: 10, backgroundColor: "rgba(188,184,184,0.8)"}}/>}
                     initialNumToRender={5}

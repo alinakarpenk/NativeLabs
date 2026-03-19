@@ -2,6 +2,7 @@ import styled from "styled-components/native";
 import React from "react";
 import news from "../data/news.json"
 import {View, Text} from "react-native";
+import Layout from "../components/Layout";
 
 const NewsImage = styled.Image`
     border-radius: 10px;
@@ -14,6 +15,13 @@ const NewsText = styled.Text`
     font-size: 18px;
 `
 
+const Title = styled.Text`
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+`
+
 export default function FullNews({route}) {
 
     const {id} = route.params;
@@ -21,10 +29,12 @@ export default function FullNews({route}) {
     const [data, setData] = React.useState(news.find(item => item.id === id));
 
     return (
+        <Layout show={true} title="Сторінка новини">
         <View style={{padding:'18px'}}>
             <NewsImage source={{ uri: data.imgURL }} />
-            <Text>{data.text}</Text>
+            <Title>{data.text}</Title>
             <NewsText>{data.fullText}</NewsText>
         </View>
+        </Layout>
     )
 }
