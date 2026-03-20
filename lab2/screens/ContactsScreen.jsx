@@ -7,6 +7,7 @@ import {
     TextItems,
     TextView
 } from "../components/styled/ContactsComponents";
+
 export default function ContactsScreen(){
     return (
         <Container
@@ -14,7 +15,7 @@ export default function ContactsScreen(){
             keyExtractor={(item, index) => item + index}
             renderItem={({item}) => (
                 <Items>
-                    <ImageView source={require("../assets/image/user (1).png" )}/>
+                    <ImageView source={require("../assets/image/user (1).png")} style={{ width: 50, height: 50 }} />
                     <TextItems>{item}</TextItems>
                 </Items>
             )}
