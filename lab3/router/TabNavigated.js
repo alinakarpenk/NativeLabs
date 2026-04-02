@@ -4,6 +4,7 @@ import ClickerScreen from "../screens/ClickerScreen";
 import ChallengeScreen from "../screens/ChallengeScreen";
 import ThemeScreen from "../screens/ThemeScreen";
 import {Ionicons} from "@expo/vector-icons";
+import {AppProvider} from "../components/AppProvider";
 
 
 const Tab = createBottomTabNavigator();
@@ -11,6 +12,7 @@ const Tab = createBottomTabNavigator();
 
 export default function TabNavigated() {
     return (
+        <AppProvider>
         <NavigationContainer>
             <Tab.Navigator
                 screenOptions={({ route }) => ({
@@ -38,5 +40,6 @@ export default function TabNavigated() {
 
             </Tab.Navigator>
         </NavigationContainer>
+        </AppProvider>
     )
 }

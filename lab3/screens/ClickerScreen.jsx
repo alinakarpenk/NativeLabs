@@ -12,17 +12,19 @@ import {
 } from "../components/styled/ClickerStyle";
 import { Animated } from "react-native";
 import {useClikerFunctions} from "../hooks/useClikerFunctions";
+import {useApp} from "../components/AppProvider";
 
 const AnimatedButtonClicker = Animated.createAnimatedComponent(ButtonClicker);
 
 export default function ClickerScreen() {
-    const [score, setScore] = useState(0)
 
-    const {longPress, flingRight, flingLeft, tap, doubleTap, pinchGesture, scale} = useClikerFunctions(setScore)
+    const {score, setScore, setTasks} = useApp()
+
+    const {longPress, flingRight, flingLeft, tap, doubleTap, pinchGesture, scale, rotation} = useClikerFunctions(setScore, setTasks)
 
     const taps = Gesture.Exclusive(doubleTap, tap);
 
-    const composed = Gesture.Simultaneous(longPress, taps, flingRight, flingLeft, pinchGesture)
+    const composed = Gesture.Simultaneous(longPress, taps, flingRight, flingLeft, pinchGesture, rotation)
 
     return (
         <Clicker>

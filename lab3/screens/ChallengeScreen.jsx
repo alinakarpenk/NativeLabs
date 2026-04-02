@@ -1,9 +1,28 @@
-import {Text, View} from "react-native";
+import {FlatList} from "react-native";
+import {useApp} from "../components/AppProvider";
+import TasksList from "../components/TasksList";
 
 export default function ChallengeScreen() {
+    const { tasks } = useApp()
+
+    const tasksArray = Object.entries(tasks).map(([key, value]) => ({
+        id: key,
+        ...value
+    }))
+
     return (
-        <View >
-            <Text>Challange</Text>
-        </View>
-    );
+
+        <FlatList
+            data={tasksArray}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+                <TasksList
+                   id={item.id}
+                   current={item.current}
+                   goal={item.goal}
+                />
+            )}
+        />
+
+    )
 }

@@ -2,7 +2,7 @@ import {Directions, Gesture} from "react-native-gesture-handler";
 import {useRef} from "react";
 import {Animated} from "react-native";
 
-export function useClikerFunctions(setScore) {
+export function useClikerFunctions(setScore, setTasks) {
 
     const randomPoints = Math.floor(Math.random() * 10) + 1
 
@@ -10,16 +10,36 @@ export function useClikerFunctions(setScore) {
 
     const lastScale = useRef(1)
 
+    const rotation = Gesture.Rotation()
+        .runOnJS(true)
+        .onEnd(() => {
+            setScore(s => s + 10)
+        })
+
     const longPress = Gesture.LongPress()
         .runOnJS(true)
         .onEnd(() => {
             setScore(s => s + 3)
+            setTasks(prevTasks => ({
+                ...prevTasks,
+                longPress: {
+                    ...prevTasks.longPress,
+                    current: prevTasks.longPress.current + 1
+                }
+            }))
         })
 
     const tap = Gesture.Tap()
         .runOnJS(true)
         .onEnd(() => {
             setScore(s => s + 1)
+            setTasks(prevTasks => ({
+                ...prevTasks,
+                clicks: {
+                    ...prevTasks.clicks,
+                    current: prevTasks.clicks.current + 1
+                }
+            }))
         })
 
     const doubleTap = Gesture.Tap()
@@ -27,6 +47,13 @@ export function useClikerFunctions(setScore) {
         .runOnJS(true)
         .onEnd(() => {
             setScore(s => s + 2)
+            setTasks(prevTasks => ({
+                ...prevTasks,
+                doubleClicks: {
+                    ...prevTasks.doubleClicks,
+                    current: prevTasks.doubleClicks.current + 1
+                }
+            }))
         })
 
     const flingRight = Gesture.Fling()
@@ -34,6 +61,13 @@ export function useClikerFunctions(setScore) {
         .runOnJS(true)
         .onStart(() => {
             setScore(s => s + randomPoints)
+            setTasks(prevTasks => ({
+                ...prevTasks,
+                swipeRight: {
+                    ...prevTasks.swipeRight,
+                    current: prevTasks.swipeRight.current + 1
+                }
+            }))
         })
 
     const flingLeft = Gesture.Fling()
@@ -41,6 +75,13 @@ export function useClikerFunctions(setScore) {
         .runOnJS(true)
         .onStart(() => {
             setScore(s => s + randomPoints)
+            setTasks(prevTasks => ({
+                ...prevTasks,
+                swipeLeft: {
+                    ...prevTasks.swipeLeft,
+                    current: prevTasks.swipeLeft.current + 1
+                }
+            }))
         })
 
     const pinchGesture = Gesture.Pinch()
@@ -57,8 +98,15 @@ export function useClikerFunctions(setScore) {
                 lastScale.current = 1
             })
             setScore(s => s + 3)
+            setTasks(prevTasks => ({
+                ...prevTasks,
+                pinch: {
+                    ...prevTasks.pinch,
+                    current: prevTasks.pinch.current + 1
+                }
+            }))
         })
 
-    return {longPress, pinchGesture, tap, doubleTap, flingLeft, flingRight, scale}
+    return {longPress, pinchGesture, tap, doubleTap, flingLeft, flingRight, scale, rotation}
 
 }
