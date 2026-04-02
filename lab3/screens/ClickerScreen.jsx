@@ -1,17 +1,54 @@
-import {Text, View} from "react-native";
-import {Gesture, GestureDetector} from "react-native-gesture-handler";
+import {Directions, Gesture, GestureDetector} from "react-native-gesture-handler";
+import {useRef, useState} from "react";
+import {
+    ButtonClicker,
+    CircleText,
+    Clicker,
+    Container, InfoText,
+    Panel,
+    Score,
+    Title,
+    Value
+} from "../components/styled/ClickerStyle";
+import { Animated } from "react-native";
+import {useClikerFunctions} from "../hooks/useClikerFunctions";
+
+const AnimatedButtonClicker = Animated.createAnimatedComponent(ButtonClicker);
 
 export default function ClickerScreen() {
+    const [score, setScore] = useState(0)
 
-    const longPress = Gesture.LongPress().onEnd(() => {
-        console.log('Довге натискання спрацювало!');
-    });
+    const {longPress, flingRight, flingLeft, tap, doubleTap, pinchGesture, scale} = useClikerFunctions(setScore)
+
+    const taps = Gesture.Exclusive(doubleTap, tap);
+
+    const composed = Gesture.Simultaneous(longPress, taps, flingRight, flingLeft, pinchGesture)
 
     return (
-        <GestureDetector gesture={longPress}>
-            <View style={{ padding: 20, backgroundColor: 'tomato' }}>
-                <Text>Затисни мене</Text>
-            </View>
-        </GestureDetector>
+        <Clicker>
+            <Score>
+                <Title>SCORE:</Title>
+                <Value>{score}</Value>
+            </Score>
+            <Container>
+                <GestureDetector gesture={composed}>
+                    <AnimatedButtonClicker style={{ transform: [{ scale: scale }] }}>
+                <CircleText>
+                    Tap me
+                </CircleText>
+                    </AnimatedButtonClicker>
+                </GestureDetector>
+                </Container>
+
+            <Panel>
+                <InfoText>Tap: +1 point</InfoText>
+                <InfoText>Double-tap: +2 points</InfoText>
+                <InfoText>Long-press: +3 points</InfoText>
+                <InfoText>Swipe: +1-10 random points</InfoText>
+                <InfoText>Pinch: +3 points</InfoText>
+            </Panel>
+
+        </Clicker>
     );
 }
+
