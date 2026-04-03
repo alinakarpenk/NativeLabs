@@ -20,11 +20,11 @@ export default function ClickerScreen() {
 
     const {score, setScore, setTasks} = useApp()
 
-    const {longPress, flingRight, flingLeft, tap, doubleTap, pinchGesture, scale, rotation} = useClikerFunctions(setScore, setTasks)
+    const {longPress, flingRight, flingLeft, tap, doubleTap, pinchGesture, scale, rotation, rotate, pan, translateX, translateY} = useClikerFunctions(setScore, setTasks)
 
     const taps = Gesture.Exclusive(doubleTap, tap);
 
-    const composed = Gesture.Simultaneous(longPress, taps, flingRight, flingLeft, pinchGesture, rotation)
+    const composed = Gesture.Simultaneous(longPress, taps, flingRight, flingLeft, pinchGesture, rotation, pan)
 
     return (
         <Clicker>
@@ -34,7 +34,7 @@ export default function ClickerScreen() {
             </Score>
             <Container>
                 <GestureDetector gesture={composed}>
-                    <AnimatedButtonClicker style={{ transform: [{ scale: scale }] }}>
+                    <AnimatedButtonClicker style={{ transform: [{ scale }, {rotate}, {translateX}, {translateY}] }}>
                 <CircleText>
                     Tap me
                 </CircleText>

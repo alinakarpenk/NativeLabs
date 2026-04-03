@@ -16,6 +16,7 @@ export function AppProvider({ children }) {
         swipeRight: { current: 0, goal: 1 },
         swipeLeft: { current: 0, goal: 1 },
         pinch: { current: 0, goal: 1 },
+        rotation: { current: 0, goal: 1 },
     })
 
     return (

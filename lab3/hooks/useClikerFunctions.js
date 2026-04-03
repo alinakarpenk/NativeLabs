@@ -10,11 +10,48 @@ export function useClikerFunctions(setScore, setTasks) {
 
     const lastScale = useRef(1)
 
+    const rotationView = useRef(new Animated.Value(0)).current
+
+    const lastRotation = useRef(0)
+
+    const translateX = useRef(new Animated.Value(0)).current;
+
+    const translateY = useRef(new Animated.Value(0)).current;
+
+    const lastOffset = useRef({ x: 0, y: 0 });
+
     const rotation = Gesture.Rotation()
         .runOnJS(true)
-        .onEnd(() => {
-            setScore(s => s + 10)
+        .onUpdate((e) => {
+            rotationView.setValue(lastRotation.current + e.rotation)
         })
+        .onEnd((e) => {
+            lastRotation.current += e.rotation
+            setScore(s => s + 10)
+            setTasks(prevTasks => ({
+                ...prevTasks,
+                rotation: {
+                    ...prevTasks.rotation,
+                    current: prevTasks.rotation.current + 1
+                }
+            }))
+        })
+
+    const rotate = rotationView.interpolate({
+        inputRange: [-Math.PI, Math.PI],
+        outputRange: ["-180deg", "180deg"],
+    })
+
+    const pan = Gesture.Pan()
+        .runOnJS(true)
+        .onUpdate((e) => {
+            translateX.setValue(lastOffset.current.x + e.translationX);
+            translateY.setValue(lastOffset.current.y + e.translationY);
+        })
+        .onEnd((e) => {
+            lastOffset.current.x += e.translationX;
+            lastOffset.current.y += e.translationY;
+        });
 
     const longPress = Gesture.LongPress()
         .runOnJS(true)
@@ -107,6 +144,6 @@ export function useClikerFunctions(setScore, setTasks) {
             }))
         })
 
-    return {longPress, pinchGesture, tap, doubleTap, flingLeft, flingRight, scale, rotation}
+    return {longPress, pinchGesture, tap, doubleTap, flingLeft, flingRight, scale, rotation, rotate, pan, translateX, translateY}
 
 }
