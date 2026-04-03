@@ -1,4 +1,4 @@
-import {FlatList} from "react-native";
+import {FlatList, StatusBar} from "react-native";
 import {useApp} from "../components/AppProvider";
 import TasksList from "../components/TasksList";
 
