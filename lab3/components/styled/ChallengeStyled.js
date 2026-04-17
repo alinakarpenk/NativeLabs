@@ -7,7 +7,7 @@ export const ViewStyled = styled.View`
     justify-content: space-between;
     padding: 15px;
     border-radius: 12px;
-    background-color: #f5f5f5;
+    background-color: #ffffff;
     elevation: 3;
     height: 80;
     align-items: center;
@@ -19,8 +19,8 @@ export const Title = styled.Text`
 `
 
 export const Progress = styled.Text`
-  font-size: 13px;
-  color: #555;
+    margin-top: 10px;
+    font-size: 13px;
+    color: #616161;
     position: absolute;
-    right: 100px;
 `

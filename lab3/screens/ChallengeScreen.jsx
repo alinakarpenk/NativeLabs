@@ -1,4 +1,4 @@
-import {FlatList, StatusBar} from "react-native";
+import {FlatList, StatusBar, View} from "react-native";
 import {useApp} from "../components/AppProvider";
 import TasksList from "../components/TasksList";
 
@@ -11,7 +11,6 @@ export default function ChallengeScreen() {
     }))
 
     return (
-
         <FlatList
             data={tasksArray}
             keyExtractor={(item) => item.id}
@@ -23,6 +22,7 @@ export default function ChallengeScreen() {
                 />
             )}
         />
+
 
     )
 }

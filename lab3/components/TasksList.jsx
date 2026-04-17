@@ -8,7 +8,7 @@ const taskTitles = {
     swipeRight: "Swipe right",
     swipeLeft: "Swipe left",
     pinch: "Pinch to resize",
-    rotation: "Rotation",
+    pan: "Pan",
 }
 
 export default function TasksList({id, current, goal}) {

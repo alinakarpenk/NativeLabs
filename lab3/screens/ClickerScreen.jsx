@@ -1,5 +1,5 @@
-import {Directions, Gesture, GestureDetector} from "react-native-gesture-handler";
-import {useRef, useState} from "react";
+import {Gesture, GestureDetector} from "react-native-gesture-handler";
+
 import {
     ButtonClicker,
     CircleText,
@@ -20,11 +20,23 @@ export default function ClickerScreen() {
 
     const {score, setScore, setTasks} = useApp()
 
-    const {longPress, flingRight, flingLeft, tap, doubleTap, pinchGesture, scale, rotation, rotate, pan, translateX, translateY} = useClikerFunctions(setScore, setTasks)
+    const {longPress, flingRight, flingLeft, tap, doubleTap, pinchGesture, scale, pan, translateX, translateY} = useClikerFunctions(setScore, setTasks)
 
     const taps = Gesture.Exclusive(doubleTap, tap);
 
-    const composed = Gesture.Simultaneous(longPress, taps, flingRight, flingLeft, pinchGesture, rotation, pan)
+    const swipe = Gesture.Simultaneous(flingRight, flingLeft);
+
+    const transform = Gesture.Simultaneous(
+        pan,
+        pinchGesture
+    );
+
+    const composed = Gesture.Race(
+        swipe,
+        transform,
+        taps,
+        longPress
+    );
 
     return (
         <Clicker>
@@ -34,7 +46,11 @@ export default function ClickerScreen() {
             </Score>
             <Container>
                 <GestureDetector gesture={composed}>
-                    <AnimatedButtonClicker style={{ transform: [{ scale }, {rotate}, {translateX}, {translateY}] }}>
+                    <AnimatedButtonClicker style={{ transform: [
+                        { scale },
+                        { translateX },
+                        { translateY }]
+                    }}>
                 <CircleText>
                     Tap me
                 </CircleText>

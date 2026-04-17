@@ -10,37 +10,11 @@ export function useClikerFunctions(setScore, setTasks) {
 
     const lastScale = useRef(1)
 
-    const rotationView = useRef(new Animated.Value(0)).current
-
-    const lastRotation = useRef(0)
-
     const translateX = useRef(new Animated.Value(0)).current;
 
     const translateY = useRef(new Animated.Value(0)).current;
 
     const lastOffset = useRef({ x: 0, y: 0 });
-
-    const rotation = Gesture.Rotation()
-        .runOnJS(true)
-        .onUpdate((e) => {
-            rotationView.setValue(lastRotation.current + e.rotation)
-        })
-        .onEnd((e) => {
-            lastRotation.current += e.rotation
-            setScore(s => s + 10)
-            setTasks(prevTasks => ({
-                ...prevTasks,
-                rotation: {
-                    ...prevTasks.rotation,
-                    current: prevTasks.rotation.current + 1
-                }
-            }))
-        })
-
-    const rotate = rotationView.interpolate({
-        inputRange: [-Math.PI, Math.PI],
-        outputRange: ["-180deg", "180deg"],
-    })
 
     const pan = Gesture.Pan()
         .runOnJS(true)
@@ -49,6 +23,14 @@ export function useClikerFunctions(setScore, setTasks) {
             translateY.setValue(lastOffset.current.y + e.translationY);
         })
         .onEnd((e) => {
+            setScore(s => s + 3)
+            setTasks(prevTasks => ({
+                ...prevTasks,
+                pan: {
+                    ...prevTasks.pan,
+                    current: prevTasks.pan.current + 1
+                }
+            }))
             lastOffset.current.x += e.translationX;
             lastOffset.current.y += e.translationY;
         });
@@ -144,6 +126,6 @@ export function useClikerFunctions(setScore, setTasks) {
             }))
         })
 
-    return {longPress, pinchGesture, tap, doubleTap, flingLeft, flingRight, scale, rotation, rotate, pan, translateX, translateY}
+    return {longPress, pinchGesture, tap, doubleTap, flingLeft, flingRight, scale, pan, translateX, translateY}
 
 }
