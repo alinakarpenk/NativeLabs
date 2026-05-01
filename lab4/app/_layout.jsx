@@ -18,6 +18,11 @@ export default function RootLayout() {
                 options={{ title: 'Файловий менеджер' }}
             />
 
+            <Stack.Screen
+                name="editor"
+                options={{ title: 'Редактор' }}
+            />
+
         </Stack>
     );
 }
