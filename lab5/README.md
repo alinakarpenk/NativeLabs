@@ -1,50 +1,47 @@
-# Welcome to your Expo app 👋
+### Лаборатораторна №4
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+#### Інструкція запуску
 
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+git clone https://github.com/alinakarpenk/ReactNativeLabs.git
+npm install
+npm start
+npx expo start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+#### 1. Яким чином за допомогою Expo Router реалізується перенаправлення неавторизованого користувача?
+В Expo Router перенаправлення зазвичай реалізується на рівні макетів (файли `_layout.jsx`), щоб захистити одразу групу екранів.
+* через компонент `<Redirect>` перевіряється стан авторизації, і якщо користувач не авторизований, компонент повертає редирект.
 
-## Learn more
+---
 
-To learn more about developing your project with Expo, look at the following resources:
+#### 2. У чому полягає різниця між використанням компонента `<Link>` та метода `router.push()`?
+Обидва інструменти слугують для переходу між екранами, але мають різне призначення:
+* **`<Link>` :** Використовується безпосередньо у JSX-розмітці, працює подібно до тегу `<a>` у HTML. 
+* **`router.push()` :** Викликається всередині функцій-обробників подій. Використовується, коли перехід має відбутися після виконання певної логіки 
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+#### 3. Як працюють динамічні маршрути в Expo Router і як отримати передані параметри?
+Динамічні маршрути дозволяють створювати один екран для відображення різних даних 
+* **Створення:** Файл називається у квадратних дужках `app/details/[id].jsx`
+* **Отримання параметрів:** Щоб прочитати переданий параметр, всередині компонента використовується хук `useLocalSearchParams()`
 
-Join our community of developers creating universal apps.
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+#### 4. Чому стан авторизації доцільно зберігати у глобальному контексті (React Context), а не в локальному стані компонента?
+* **Стан авторизації** (наприклад, дані користувача user) потрібен багатьом компонентам тому що може використовуватися у різних частинах додатка одночасно
+
+---
+
+#### 5. Для чого використовуються групи маршрутів (folderName) і як вони впливають на URL-адресу?
+* **Групи маршрутів створюються за допомогою круглих дужок у назві папки (app) або (auth).**
+* Вони ніяк не впливають на URL-адресу екрана. Тобто файл, який фізично знаходиться за шляхом app/(auth)/login.jsx, буде доступний за короткою адресою /login (сегмент (auth) ігнорується маршрутизатором).
+
+---
+
+![IMAGE](/lab5/assets/images/5451996147011489907.jpg)
+![IMAGE](/lab5/assets/images/5451996147011489908.jpg)
+![IMAGE](/lab5/assets/images/5451996147011489909.jpg)
+![IMAGE](/lab5/assets/images/5451996147011489910.jpg)
+![IMAGE](/lab5/assets/images/5451996147011489911.jpg)
