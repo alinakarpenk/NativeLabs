@@ -41,9 +41,8 @@ LongPressGestureHandler для довгого натискання.
 
 #### Скріншоти:
 
-![IMAGE](/lab2/assets/image/5325792325474652833.jpg)
-![IMAGE](/lab2/assets/image/5325792325474652834.jpg)
-![IMAGE](/lab2/assets/image/5325792325474652835.jpg)
-![IMAGE](/lab2/assets/image/5325792325474652836.jpg)
+![IMAGE](/lab3/assets/5409091562618164282.jpg)
+![IMAGE](/lab3/assets/5409091562618164283.jpg)
+
 
 

@@ -19,8 +19,8 @@ export const Title = styled.Text`
 `
 
 export const Progress = styled.Text`
-    margin-top: 10px;
     font-size: 13px;
     color: #616161;
-    position: absolute;
+    left: 230px;
+    position : absolute;
 `
